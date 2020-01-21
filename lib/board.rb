@@ -6,6 +6,10 @@ class Spot
     def initialize(piece=nil)
         @piece = piece
     end
+
+    def occupied?
+        piece.nil? ? false : true
+    end
 end
 
 class Board
@@ -63,4 +67,5 @@ class Board
 end
 
 board = Board.new
-puts board.board.map {|spot| spot.piece}
+p board.board.map {|spot| spot.piece}
+p board.board[1,0].piece.valid_moves([1,0], board)
