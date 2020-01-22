@@ -67,5 +67,8 @@ class Board
 end
 
 board = Board.new
-p board.board.map {|spot| spot.piece}
-p board.board[1,0].piece.valid_moves([1,0], board)
+pieces = board.board.map {|elm| elm.piece}
+# board.board.column(0).each_with_index do |elm, i|
+#     p i
+# end
+p board.board[0,4].piece.valid_moves([0,4], board)
