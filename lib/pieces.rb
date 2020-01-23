@@ -55,25 +55,54 @@ class Rook < Piece
         moves = []
         i = start[0]
         j = start[1]
+        you = board.board[i,j].piece
         row = i
         column = j
         while row < 7
             row += 1
-            board.board[row, j].occupied? ? break : moves << [row, j]
+            if board.board[row, j].occupied? 
+                if you.color != board.board[row, j].piece.color 
+                    moves << [row, j]
+                end
+                break
+            else
+                moves << [row, j]
+            end
         end
         while column < 7
             column += 1
-            board.board[i, column].occupied? ? break : moves << [i, column]
+            if board.board[i, column].occupied?
+                if you.color != board.board[i, column].piece.color
+                    moves << [i, column]
+                end
+                break
+            else
+                moves << [i, column]
+            end
         end
         row = i
         column = j
         while row > 0
             row -= 1
-            board.board[row, j].occupied? ? break : moves << [row, j]
+            if board.board[row, j].occupied? 
+                if you.color != board.board[row, j].piece.color 
+                    moves << [row, j]
+                end
+                break
+            else
+                moves << [row, j]
+            end
         end
         while column > 0
             column -= 1
-            board.board[i, column].occupied? ? break : moves << [i, column]
+            if board.board[i, column].occupied?
+                if you.color != board.board[i, column].piece.color
+                    moves << [i, column]
+                end
+                break
+            else
+                moves << [i, column]
+            end
         end
         return moves
     end
@@ -90,33 +119,62 @@ class Bishop < Piece
         moves = []
         i = start[0]
         j = start[1]
+        you = board.board[i, j].piece
         row = i
         column = j
         while row < 7 && column < 7
             row += 1
             column += 1
-            board.board[row, column].occupied? ? break : moves << [row, column]
+            if board.board[row, column].occupied?
+                if you.color != board.board[row, column].piece.color
+                    moves << [row, column]
+                end
+                break
+            else
+                moves << [row, column]
+            end
         end
         row = i
         column = j
         while row < 7 && column > 0
             row += 1
             column -= 1
-            board.board[row, column].occupied? ? break : moves << [row, column]
+            if board.board[row, column].occupied?
+                if you.color != board.board[row, column].piece.color
+                    moves << [row, column]
+                end
+                break
+            else
+                moves << [row, column]
+            end
         end
         row = i
         column = j
         while row > 0 && column < 7
             row -= 1
             column += 1
-            board.board[row, column].occupied? ? break : moves << [row, column]
+            if board.board[row, column].occupied?
+                if you.color != board.board[row, column].piece.color
+                    moves << [row, column]
+                end
+                break
+            else
+                moves << [row, column]
+            end
         end
         row = i
         column = j
         while row > 0 && column > 0
             row -= 1
             column -= 1
-            board.board[row, column].occupied? ? break : moves << [row, column]
+            if board.board[row, column].occupied?
+                if you.color != board.board[row, column].piece.color
+                    moves << [row, column]
+                end
+                break
+            else
+                moves << [row, column]
+            end
         end
         return moves
     end
@@ -132,6 +190,7 @@ class Knight < Piece
     def valid_moves(start, board)
         i = start[0]
         j = start[1]
+        you = board.board[i,j].piece
         first = [i + 1, j + 2] 
         second = [i -1 , j - 2] 
         third = [i - 1, j + 2] 
@@ -142,7 +201,9 @@ class Knight < Piece
         eigth = [i - 2, j - 1] 
         moves = [first, second, third, fourth, fifth, sixth, seventh, eigth]
         moves = moves.select {|move| move[0] < 8 && move[0] >= 0 && move[1] < 8 && move[1] >= 0}
-        moves = moves.select {|move| !board.board[move[0], move[1]].occupied?}
+        moves = moves.select {|move| (!board.board[move[0], move[1]].occupied?) || 
+                                        (board.board[move[0], move[1]].occupied? && 
+                                        you.color != board.board[move[0], move[1]].piece.color)}
         return moves
     end
 
@@ -162,25 +223,54 @@ class Queen < Piece
         moves = []
         i = start[0]
         j = start[1]
+        you = board.board[i,j].piece
         row = i
         column = j
         while row < 7
             row += 1
-            board.board[row, j].occupied? ? break : moves << [row, j]
+            if board.board[row, j].occupied? 
+                if you.color != board.board[row, j].piece.color 
+                    moves << [row, j]
+                end
+                break
+            else
+                moves << [row, j]
+            end
         end
         while column < 7
             column += 1
-            board.board[i, column].occupied? ? break : moves << [i, column]
+            if board.board[i, column].occupied?
+                if you.color != board.board[i, column].piece.color
+                    moves << [i, column]
+                end
+                break
+            else
+                moves << [i, column]
+            end
         end
         row = i
         column = j
         while row > 0
             row -= 1
-            board.board[row, j].occupied? ? break : moves << [row, j]
+            if board.board[row, j].occupied? 
+                if you.color != board.board[row, j].piece.color 
+                    moves << [row, j]
+                end
+                break
+            else
+                moves << [row, j]
+            end
         end
         while column > 0
             column -= 1
-            board.board[i, column].occupied? ? break : moves << [i, column]
+            if board.board[i, column].occupied?
+                if you.color != board.board[i, column].piece.color
+                    moves << [i, column]
+                end
+                break
+            else
+                moves << [i, column]
+            end
         end
         return moves
     end
@@ -189,36 +279,66 @@ class Queen < Piece
         moves = []
         i = start[0]
         j = start[1]
+        you = board.board[i, j].piece
         row = i
         column = j
         while row < 7 && column < 7
             row += 1
             column += 1
-            board.board[row, column].occupied? ? break : moves << [row, column]
+            if board.board[row, column].occupied?
+                if you.color != board.board[row, column].piece.color
+                    moves << [row, column]
+                end
+                break
+            else
+                moves << [row, column]
+            end
         end
         row = i
         column = j
         while row < 7 && column > 0
             row += 1
             column -= 1
-            board.board[row, column].occupied? ? break : moves << [row, column]
+            if board.board[row, column].occupied?
+                if you.color != board.board[row, column].piece.color
+                    moves << [row, column]
+                end
+                break
+            else
+                moves << [row, column]
+            end
         end
         row = i
         column = j
         while row > 0 && column < 7
             row -= 1
             column += 1
-            board.board[row, column].occupied? ? break : moves << [row, column]
+            if board.board[row, column].occupied?
+                if you.color != board.board[row, column].piece.color
+                    moves << [row, column]
+                end
+                break
+            else
+                moves << [row, column]
+            end
         end
         row = i
         column = j
         while row > 0 && column > 0
             row -= 1
             column -= 1
-            board.board[row, column].occupied? ? break : moves << [row, column]
+            if board.board[row, column].occupied?
+                if you.color != board.board[row, column].piece.color
+                    moves << [row, column]
+                end
+                break
+            else
+                moves << [row, column]
+            end
         end
         return moves
     end
+
 
 end
 
@@ -231,6 +351,7 @@ class King < Piece
     def valid_moves(start, board)
         i = start[0]
         j = start[1]
+        you = board.board[i, j].piece
         first = [i + 1, j] 
         second = [i + 1 , j + 1] 
         third = [i, j + 1] 
@@ -241,7 +362,9 @@ class King < Piece
         eigth = [i + 1, j - 1] 
         moves = [first, second, third, fourth, fifth, sixth, seventh, eigth]
         moves = moves.select {|move| move[0] < 8 && move[0] >= 0 && move[1] < 8 && move[1] >= 0}
-        moves = moves.select {|move| !board.board[move[0], move[1]].occupied?}
+        moves = moves.select {|move| (!board.board[move[0], move[1]].occupied?) || 
+                                        (board.board[move[0], move[1]].occupied? && 
+                                        you.color != board.board[move[0], move[1]].piece.color)}
         return moves
     end
 
