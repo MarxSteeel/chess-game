@@ -18,6 +18,18 @@ class Board
         @board = create_board
     end
 
+    def move(start, finish)
+        i = start[0]
+        j = start[1]
+        you = self.board[i, j].piece
+        valid_moves = you.valid_moves([i,j], self)
+        if valid_moves.include?(finish)
+            self.board[finish[0], finish[1]].piece = you
+            self.board[i, j].piece = nil
+        end
+        return
+    end
+
     private
 
     def create_board
@@ -67,8 +79,10 @@ class Board
 end
 
 board = Board.new
-pieces = board.board.map {|elm| elm.piece}
 # board.board.column(0).each_with_index do |elm, i|
 #     p i
 # end
-p board.board[0,4].piece.valid_moves([0,4], board)
+# p board.board[0,0].piece.valid_moves([0,0], board)
+board.move([0,1], [2,0])
+pieces = board.board.map {|elm| elm.piece}
+p pieces
