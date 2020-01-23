@@ -8,7 +8,7 @@ class Spot
     end
 
     def occupied?
-        piece.nil? ? false : true
+        !piece.nil?
     end
 end
 
@@ -28,6 +28,27 @@ class Board
             self.board[i, j].piece = nil
         end
         return
+    end
+
+    def check?
+        kings = find_kings
+        white_king = kings.select {|king| king.piece.color == :white}
+        black_king = kings.select {|king| king.piece.color == :black}
+        white_pieces = find_pieces[:white]
+        black_pieces = find_pieces[:black]
+        white_moves = []
+        white_pieces.each do |spot|
+            index = self.board.find_index(spot)
+            white_moves += spot.piece.valid_moves(index, self)
+        end
+        black_moves = []
+        black_pieces.each do |spot|
+            index = self.board.find_index(spot)
+            black_moves += spot.piece.valid_moves(index,self)
+        end
+        white_king_index = self.board.find_index(white_king[0].piece)
+        black_king_index = self.board.find_index(black_king[0].piece)
+        return (white_moves.include?(black_king_index) || black_moves.include?(white_king_index))
     end
 
     private
@@ -76,6 +97,20 @@ class Board
         matrix[7,7].piece = Rook.new(:black)
         return matrix
     end
+
+    def find_pieces
+        occupied_spots = self.board.select {|spot| spot.occupied?}
+        white_pieces = occupied_spots.select {|spot| spot.piece.color == :white}
+        black_pieces = occupied_spots.select {|spot| spot.piece.color == :black}
+        return {:white => white_pieces, :black => black_pieces}
+    end
+
+    def find_kings
+        occupied_spots = self.board.select {|spot| spot.occupied?}
+        kings = occupied_spots.select {|spot| spot.piece.type == "king"}
+        return kings
+    end
+    
 end
 
 board = Board.new
@@ -83,6 +118,9 @@ board = Board.new
 #     p i
 # end
 # p board.board[0,0].piece.valid_moves([0,0], board)
-board.move([0,1], [2,0])
-pieces = board.board.map {|elm| elm.piece}
-p pieces
+# board.move([0,1], [2,0])
+# board.move([2,0], [4,1])
+# board.move([4,1], [6,2])
+# pieces = board.board.select {|spot| spot.occupied?}
+# pieces = pieces.select {|spot| spot.piece.type == "king"}
+p board.check?

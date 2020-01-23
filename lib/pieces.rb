@@ -25,20 +25,28 @@ class Pawn < Piece
             if i == 1
                 moves << [i + 2, j]
             end
-            if board.board[i + 1, j + 1].occupied? && board.board[i+1,j+1].piece.color == :black
-                moves << [i + 1, j + 1]
-            elsif board.board[i + 1, j - 1].occupied? && board.board[i+1,j-1].piece.color == :black
-                moves << [i + 1, j - 1]
+            if j < 7
+                if board.board[i + 1, j + 1].occupied? && board.board[i+1,j+1].piece.color == :black
+                    moves << [i + 1, j + 1]
+                end
+            elsif j > 0
+                if board.board[i + 1, j - 1].occupied? && board.board[i+1,j-1].piece.color == :black
+                    moves << [i + 1, j - 1]
+                end
             end
         elsif @color == :black
             moves << [i - 1, j]
             if i == 6
                 moves << [i - 2, j]
             end
-            if board.board[i - 1, j + 1].occupied? && board.board[i-1,j+1].piece.color == :white
-                moves << [i - 1, j + 1]
-            elsif board.board[i - 1, j - 1].occupied? && board.board[i-1,j-1].piece.color == :white
-                moves << [i - 1, j - 1]
+            if j < 7
+                if board.board[i - 1, j + 1].occupied? && board.board[i-1,j+1].piece.color == :white
+                    moves << [i - 1, j + 1]
+                end
+            elsif j > 0
+                if board.board[i - 1, j - 1].occupied? && board.board[i-1,j-1].piece.color == :white
+                    moves << [i - 1, j - 1]
+                end
             end
         end
         moves
