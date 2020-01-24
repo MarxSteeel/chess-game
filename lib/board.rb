@@ -119,6 +119,23 @@ class Board
         end
     end
 
+    def promote(spot, new_piece)
+        index = self.board.find_index(spot)
+        i = index[0]
+        j = index[1]
+        color = self.board[i,j].piece.color
+        if new_piece == "queen"
+            self.board[i,j].piece = Queen.new(color)
+        elsif new_piece == "knight"
+            self.board[i,j].piece = Knight.new(color)
+        elsif new_piece == "rook"
+            self.board[i,j].piece = Rook.new(color)
+        elsif new_piece == "bishop"
+            self.board[i,j].piece = Bishop.new(color)
+        end
+        return
+    end
+
     private
 
     def create_board
@@ -189,15 +206,16 @@ board = Board.new
 
 # Jaque mate pastor
 
-# board.move([1,0], [1,1])
+# board.move([1,0], [2,0])
 # board.move([6,4], [5,4])
 # board.move([1,7], [2,7])
 # board.move([7,3], [5,5])
 # board.move([7,5], [4,2])
 # board.move([5,5], [1,5])
 
-pieces = board.board.map {|spot| spot.piece}
 # pieces = pieces.select {|spot| spot.piece.type == "king"}
+# board.promote(board.board[1,0], "queen")
+pieces = board.board.map {|spot| spot.piece}
 p pieces
 p board.check?
 p board.checkmate?

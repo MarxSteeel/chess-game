@@ -16,7 +16,18 @@ class Pawn < Piece
         @type = "pawn"
     end
 
+    def can_promote?(index, board)
+        i = index[0]
+        if (@color == :white && i == 7)
+            return true
+        elsif (@color == :black && i == 0)
+            return true
+        end
+        return false
+    end 
+
     def valid_moves(start, board)
+
         moves = []
         i = start[0]
         j = start[1]
