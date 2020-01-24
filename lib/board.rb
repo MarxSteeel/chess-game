@@ -30,11 +30,11 @@ class Board
             if (you.color == :white && self.check? == -1) || (you.color == :black && self.check? == 1)
                 self.board[finish[0], finish[1]].piece = original_piece
                 self.board[i, j].piece = you
-                puts "La cagaste"
+                puts "Les regalaste un jaque"
                 return -1
             end
         end
-        return
+        return 0
     end
 
     def check?
@@ -61,6 +61,62 @@ class Board
             return -1 #white king in check
         end
         return 0
+    end
+
+    def checkmate?
+        white_pieces = find_pieces[:white]
+        black_pieces = find_pieces[:black]
+        white_counter = []
+        white_pieces.each do |spot|
+            index = self.board.find_index(spot)
+            i = index[0]
+            j = index[1]
+            you = self.board[i, j].piece
+            valid_moves = you.valid_moves([i,j], self)
+            valid_moves.each do |move|
+                original_piece = self.board[move[0], move[1]].piece
+                self.board[move[0], move[1]].piece = you
+                self.board[i, j].piece = nil
+                if self.check? == -1
+                    # puts "Les regalaste un jaque"
+                    white_counter << -1
+                else
+                    white_counter << 0
+                end
+                self.board[move[0], move[1]].piece = original_piece
+                self.board[i, j].piece = you
+            end
+        end
+        # p white_counter
+        black_counter = []
+        black_pieces.each do |spot|
+            index = self.board.find_index(spot)
+            i = index[0]
+            j = index[1]
+            you = self.board[i, j].piece
+            valid_moves = you.valid_moves([i,j], self)
+            valid_moves.each do |move|
+                original_piece = self.board[move[0], move[1]].piece
+                self.board[move[0], move[1]].piece = you
+                self.board[i, j].piece = nil
+                if self.check? == 1
+                    # puts "Les regalaste un jaque"
+                    black_counter << -1
+                else
+                    black_counter << 0
+                end
+                self.board[move[0], move[1]].piece = original_piece
+                self.board[i, j].piece = you
+            end
+        end
+        # p black_counter
+        if !white_counter.include?(0)
+            return -1 #Black wins
+        elsif !black_counter.include?(0)
+            return 1 #White wins
+        else
+            return 0
+        end
     end
 
     private
@@ -130,10 +186,18 @@ board = Board.new
 #     p i
 # end
 # p board.board[0,0].piece.valid_moves([0,0], board)
-board.move([6,2], [5,2])
-board.move([7,3], [4,0])
-board.move([1,3], [2,3])
+
+# Jaque mate pastor
+
+# board.move([1,0], [1,1])
+# board.move([6,4], [5,4])
+# board.move([1,7], [2,7])
+# board.move([7,3], [5,5])
+# board.move([7,5], [4,2])
+# board.move([5,5], [1,5])
+
 pieces = board.board.map {|spot| spot.piece}
 # pieces = pieces.select {|spot| spot.piece.type == "king"}
 p pieces
 p board.check?
+p board.checkmate?
