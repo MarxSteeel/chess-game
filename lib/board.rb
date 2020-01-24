@@ -13,7 +13,7 @@ class Spot
 end
 
 class Board
-    attr_reader :board
+    attr_accessor :board
     def initialize
         @board = create_board
     end
@@ -24,8 +24,15 @@ class Board
         you = self.board[i, j].piece
         valid_moves = you.valid_moves([i,j], self)
         if valid_moves.include?(finish)
+            original_piece = self.board[finish[0], finish[1]].piece
             self.board[finish[0], finish[1]].piece = you
             self.board[i, j].piece = nil
+            if (you.color == :white && self.check? == -1) || (you.color == :black && self.check? == 1)
+                self.board[finish[0], finish[1]].piece = original_piece
+                self.board[i, j].piece = you
+                puts "La cagaste"
+                return -1
+            end
         end
         return
     end
@@ -46,9 +53,14 @@ class Board
             index = self.board.find_index(spot)
             black_moves += spot.piece.valid_moves(index,self)
         end
-        white_king_index = self.board.find_index(white_king[0].piece)
-        black_king_index = self.board.find_index(black_king[0].piece)
-        return (white_moves.include?(black_king_index) || black_moves.include?(white_king_index))
+        white_king_index = self.board.find_index(white_king[0])
+        black_king_index = self.board.find_index(black_king[0])
+        if white_moves.include?(black_king_index) 
+            return 1 #black king in check
+        elsif black_moves.include?(white_king_index)
+            return -1 #white king in check
+        end
+        return 0
     end
 
     private
@@ -118,9 +130,10 @@ board = Board.new
 #     p i
 # end
 # p board.board[0,0].piece.valid_moves([0,0], board)
-# board.move([0,1], [2,0])
-# board.move([2,0], [4,1])
-# board.move([4,1], [6,2])
-# pieces = board.board.select {|spot| spot.occupied?}
+board.move([6,2], [5,2])
+board.move([7,3], [4,0])
+board.move([1,3], [2,3])
+pieces = board.board.map {|spot| spot.piece}
 # pieces = pieces.select {|spot| spot.piece.type == "king"}
+p pieces
 p board.check?
