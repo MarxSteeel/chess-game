@@ -185,24 +185,30 @@ class Board
         board_string = ""
         row = 7
         while row > -1
+            board_string += (row + 1).to_s + " "
             self.board.row(row).each_with_index do |spot, i|
                 if (i + row).even? || (i + row) == 0
                     if spot.occupied?
-                        board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :light_black)
-                    else
                         board_string += " ".colorize(:background => :light_black)
+                        board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :light_black)
+                        board_string += " ".colorize(:background => :light_black)
+                    else
+                        board_string += (" ".colorize(:background => :light_black)) * 3
                     end
                 else
                     if spot.occupied?
-                        board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :black)
-                    else
                         board_string += " ".colorize(:background => :black)
+                        board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :black)
+                        board_string += " ".colorize(:background => :black)
+                    else
+                        board_string += (" ".colorize(:background => :black)) * 3
                     end
                 end
             end
             board_string += "\n"
             row -= 1
         end
+        board_string += "   a  b  c  d  e  f  g  h "
         return board_string
     end
 
@@ -296,7 +302,7 @@ board = Board.new
 pieces = board.board.map {|spot| spot.piece}
 # p board.board[1,5].piece.counter
 # puts board.board[0,0].piece.symbol.colorize(:background => :light_black)
-p pieces
-p board.check?
-p board.checkmate?
+# p pieces
+# p board.check?
+# p board.checkmate?
 puts board.render
