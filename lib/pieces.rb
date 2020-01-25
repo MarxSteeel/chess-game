@@ -1,13 +1,18 @@
 class Piece
-    attr_reader :color, :type
+    attr_reader :color, :type, :symbol
     attr_accessor :counter
     def initialize(color)
         @color = color
         @type = set_type
         @counter = 0
+        @symbol = set_symbol
     end
 
     def set_type
+        return nil
+    end
+
+    def set_symbol
         return nil
     end
 end
@@ -16,6 +21,10 @@ class Pawn < Piece
 
     def set_type
         @type = "pawn"
+    end
+
+    def set_symbol
+        color == :white ? "♟" : "♙"
     end
 
     def can_promote?(index, board)
@@ -70,6 +79,10 @@ class Rook < Piece
 
     def set_type
         @type = "rook"
+    end
+
+    def set_symbol
+        color == :white ? "♜" : "♖"
     end
 
     def valid_moves(start, board)
@@ -134,6 +147,10 @@ class Bishop < Piece
 
     def set_type
         @type = "bishop"
+    end
+
+    def set_symbol
+        color == :white ? "♝" : "♗"
     end
 
     def valid_moves(start, board)
@@ -208,6 +225,11 @@ class Knight < Piece
         @type = "knight"
     end
 
+    def set_symbol
+        color == :white ? "♞" : "♘"
+    end
+
+
     def valid_moves(start, board)
         i = start[0]
         j = start[1]
@@ -234,6 +256,10 @@ class Queen < Piece
 
     def set_type
         @type = "queen"
+    end
+
+    def set_symbol
+        color == :white ? "♛" : "♕"
     end
 
     def valid_moves(start, board)
@@ -367,6 +393,10 @@ class King < Piece
 
     def set_type
         @type = "king"
+    end
+
+    def set_symbol
+        color == :white ? "♚" : "♔"
     end
 
     def valid_moves(start, board)

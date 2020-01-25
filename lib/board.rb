@@ -1,5 +1,6 @@
 require "matrix"
 require_relative "pieces"
+require "colorize"
 
 class Spot
     attr_accessor :piece
@@ -180,7 +181,30 @@ class Board
         return 0
     end
     
-
+    def render
+        board_string = ""
+        row = 7
+        while row > -1
+            self.board.row(row).each_with_index do |spot, i|
+                if (i + row).even? || (i + row) == 0
+                    if spot.occupied?
+                        board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :light_black)
+                    else
+                        board_string += " ".colorize(:background => :light_black)
+                    end
+                else
+                    if spot.occupied?
+                        board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :black)
+                    else
+                        board_string += " ".colorize(:background => :black)
+                    end
+                end
+            end
+            board_string += "\n"
+            row -= 1
+        end
+        return board_string
+    end
 
     private
 
@@ -258,9 +282,11 @@ board = Board.new
 # board.move([7,3], [5,5])
 # board.move([7,5], [4,2])
 # board.move([5,5], [1,5])
-board.move([6,6], [5,6])
-board.move([7,5], [6,6])
-board.move([7,6], [5,5])
+
+
+# board.move([6,6], [5,6])
+# board.move([7,5], [6,6])
+# board.move([7,6], [5,5])
 # board.move([7,7], [7,6])
 # board.move([7,6], [7,7])
 
@@ -269,6 +295,8 @@ board.move([7,6], [5,5])
 # p board.castle("short", :black)
 pieces = board.board.map {|spot| spot.piece}
 # p board.board[1,5].piece.counter
+# puts board.board[0,0].piece.symbol.colorize(:background => :light_black)
 p pieces
 p board.check?
 p board.checkmate?
+puts board.render
