@@ -31,7 +31,7 @@ class Board
             if (you.color == :white && self.check? == -1) || (you.color == :black && self.check? == 1)
                 self.board[finish[0], finish[1]].piece = original_piece
                 self.board[i, j].piece = you
-                puts "Les regalaste un jaque"
+                # puts "Les regalaste un jaque"
                 return -1
             end
         end
@@ -63,62 +63,6 @@ class Board
             return -1 #white king in check
         end
         return 0
-    end
-
-    def checkmate?
-        white_pieces = find_pieces[:white]
-        black_pieces = find_pieces[:black]
-        white_counter = []
-        white_pieces.each do |spot|
-            index = self.board.find_index(spot)
-            i = index[0]
-            j = index[1]
-            you = self.board[i, j].piece
-            valid_moves = you.valid_moves([i,j], self)
-            valid_moves.each do |move|
-                original_piece = self.board[move[0], move[1]].piece
-                self.board[move[0], move[1]].piece = you
-                self.board[i, j].piece = nil
-                if self.check? == -1
-                    # puts "Les regalaste un jaque"
-                    white_counter << -1
-                else
-                    white_counter << 0
-                end
-                self.board[move[0], move[1]].piece = original_piece
-                self.board[i, j].piece = you
-            end
-        end
-        # p white_counter
-        black_counter = []
-        black_pieces.each do |spot|
-            index = self.board.find_index(spot)
-            i = index[0]
-            j = index[1]
-            you = self.board[i, j].piece
-            valid_moves = you.valid_moves([i,j], self)
-            valid_moves.each do |move|
-                original_piece = self.board[move[0], move[1]].piece
-                self.board[move[0], move[1]].piece = you
-                self.board[i, j].piece = nil
-                if self.check? == 1
-                    # puts "Les regalaste un jaque"
-                    black_counter << -1
-                else
-                    black_counter << 0
-                end
-                self.board[move[0], move[1]].piece = original_piece
-                self.board[i, j].piece = you
-            end
-        end
-        # p black_counter
-        if !white_counter.include?(0)
-            return -1 #Black wins
-        elsif !black_counter.include?(0)
-            return 1 #White wins
-        else
-            return 0
-        end
     end
 
     def promote(spot, new_piece)
@@ -212,6 +156,13 @@ class Board
         return board_string
     end
 
+    def find_pieces
+        occupied_spots = self.board.select {|spot| spot.occupied?}
+        white_pieces = occupied_spots.select {|spot| spot.piece.color == :white}
+        black_pieces = occupied_spots.select {|spot| spot.piece.color == :black}
+        return {:white => white_pieces, :black => black_pieces}
+    end
+
     private
 
     def create_board
@@ -259,13 +210,6 @@ class Board
         return matrix
     end
 
-    def find_pieces
-        occupied_spots = self.board.select {|spot| spot.occupied?}
-        white_pieces = occupied_spots.select {|spot| spot.piece.color == :white}
-        black_pieces = occupied_spots.select {|spot| spot.piece.color == :black}
-        return {:white => white_pieces, :black => black_pieces}
-    end
-
     def find_kings
         occupied_spots = self.board.select {|spot| spot.occupied?}
         kings = occupied_spots.select {|spot| spot.piece.type == "king"}
@@ -299,10 +243,11 @@ board = Board.new
 # pieces = pieces.select {|spot| spot.piece.type == "king"}
 # board.promote(board.board[1,0], "queen")
 # p board.castle("short", :black)
-pieces = board.board.map {|spot| spot.piece}
+# pieces = board.board.map {|spot| spot.piece}
 # p board.board[1,5].piece.counter
 # puts board.board[0,0].piece.symbol.colorize(:background => :light_black)
 # p pieces
 # p board.check?
 # p board.checkmate?
 puts board.render
+

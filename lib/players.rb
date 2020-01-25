@@ -31,6 +31,6 @@ class BlackPlayer < Player
     end
 end
 
-player_one = WhitePlayer.new
-board = Board.new
-p player_one.can_move?([0,0], board)
+# player_one = WhitePlayer.new
+# board = Board.new
+# p player_one.can_move?([0,0], board)
