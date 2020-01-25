@@ -34,6 +34,7 @@ class Board
                 return -1
             end
         end
+        self.board[finish[0], finish[1]].piece.counter += 1
         return 0
     end
 
@@ -136,6 +137,51 @@ class Board
         return
     end
 
+    def castle(type, color)
+        begin
+            if color == :white
+                i = 0
+            elsif color == :black
+                i = 7
+            end
+            king = self.board[i,4].piece
+            if type == "short"
+                rook = self.board[i,7].piece
+                knight = self.board[i,6]
+                bishop = self.board[i,5]
+            elsif type == "long"
+                rook = self.board[i,0].piece
+                knight = self.board[i,1]
+                bishop = self.board[i,2]
+                queen = self.board[i,3]
+            end
+            if king.counter == 0 && rook.counter == 0 && !knight.occupied? && !bishop.occupied?
+                if type == "short"
+                    self.move([i,4], [i,5])
+                    self.move([i,5], [i,6])
+                    self.board[i,7].piece = nil
+                    self.board[i,5].piece = Rook.new(color)
+                    king.counter -= 2
+                    self.board[i,5].piece.counter += 1
+                    return 1
+                elsif type == "long" && !queen.occupied?
+                    self.move([i,4], [i,3])
+                    self.move([i,3], [i,2])
+                    self.board[i,0].piece = nil
+                    self.board[i,3].piece = Rook.new(color)
+                    king.counter -= 2
+                    self.board[0,3].piece.counter += 1
+                    return 1
+                end
+            end
+        rescue
+            return 0
+        end
+        return 0
+    end
+    
+
+
     private
 
     def create_board
@@ -212,10 +258,17 @@ board = Board.new
 # board.move([7,3], [5,5])
 # board.move([7,5], [4,2])
 # board.move([5,5], [1,5])
+board.move([6,6], [5,6])
+board.move([7,5], [6,6])
+board.move([7,6], [5,5])
+# board.move([7,7], [7,6])
+# board.move([7,6], [7,7])
 
 # pieces = pieces.select {|spot| spot.piece.type == "king"}
 # board.promote(board.board[1,0], "queen")
+# p board.castle("short", :black)
 pieces = board.board.map {|spot| spot.piece}
+# p board.board[1,5].piece.counter
 p pieces
 p board.check?
 p board.checkmate?

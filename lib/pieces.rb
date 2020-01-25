@@ -1,8 +1,10 @@
 class Piece
     attr_reader :color, :type
+    attr_accessor :counter
     def initialize(color)
         @color = color
         @type = set_type
+        @counter = 0
     end
 
     def set_type
