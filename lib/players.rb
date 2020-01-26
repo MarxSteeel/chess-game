@@ -1,5 +1,6 @@
 require_relative "board"
 require_relative "pieces"
+require_relative "game"
 
 class Player
     attr_reader :color, :dictionary
@@ -19,7 +20,7 @@ class Player
         if can_move?(start, board)
             i = start[0]
             j = start[1]
-            board.move([i,j], [finish[0], finish[1]])
+            return board.move([i,j], [finish[0], finish[1]])
         else
             return false
         end
@@ -61,8 +62,10 @@ class BlackPlayer < Player
     end
 end
 
-player_one = WhitePlayer.new
-board = Board.new
-player_one.move("b1c3", board)
-puts "\n"
-puts board.render
+# game = Game.new
+# player_one = WhitePlayer.new
+# board = Board.new
+# player_one.move("b1c3", board)
+# puts "\n"
+# puts board.render
+# p game.checkmate?(board)

@@ -32,11 +32,13 @@ class Board
                 self.board[finish[0], finish[1]].piece = original_piece
                 self.board[i, j].piece = you
                 # puts "Les regalaste un jaque"
-                return -1
+                return false
             end
+        elsif !valid_moves.include?(finish)
+            return false
         end
         self.board[finish[0], finish[1]].piece.counter += 1
-        return 0
+        return true
     end
 
     def check?
@@ -108,7 +110,7 @@ class Board
                     self.board[i,5].piece = Rook.new(color)
                     king.counter -= 2
                     self.board[i,5].piece.counter += 1
-                    return 1
+                    return true
                 elsif type == "long" && !queen.occupied?
                     self.move([i,4], [i,3])
                     self.move([i,3], [i,2])
@@ -116,13 +118,13 @@ class Board
                     self.board[i,3].piece = Rook.new(color)
                     king.counter -= 2
                     self.board[0,3].piece.counter += 1
-                    return 1
+                    return true
                 end
             end
         rescue
-            return 0
+            return false
         end
-        return 0
+        return false
     end
     
     def render
@@ -218,7 +220,7 @@ class Board
     
 end
 
-board = Board.new
+# board = Board.new
 # board.board.column(0).each_with_index do |elm, i|
 #     p i
 # end
@@ -249,5 +251,5 @@ board = Board.new
 # p pieces
 # p board.check?
 # p board.checkmate?
-puts board.render
+# puts board.render
 

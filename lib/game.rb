@@ -2,55 +2,68 @@ require_relative "board"
 require_relative "pieces"
 
 class Game
-    attr_accessor :counter
-    def initialize
-        @counter = 0
+    attr_reader :board
+    def initialize(board)
+        @board = board
     end
 
-    def checkmate?(board)
-        white_pieces = board.find_pieces[:white]
-        black_pieces = board.find_pieces[:black]
+    def end?
+        if self.checkmate? == 1
+            puts @board.render
+            puts "White wins"
+            return true
+        elsif self.checkmate? == -1
+            puts @board.render
+            puts "Black wins"
+            return true
+        end
+        return false
+    end
+
+    def checkmate?
+        white_pieces = @board.find_pieces[:white]
+        black_pieces = @board.find_pieces[:black]
         white_counter = []
         white_pieces.each do |spot|
-            index = board.board.find_index(spot)
+            index = @board.board.find_index(spot)
             i = index[0]
             j = index[1]
-            you = board.board[i, j].piece
-            valid_moves = you.valid_moves([i,j], board)
+            you = @board.board[i, j].piece
+            valid_moves = you.valid_moves([i,j], @board)
             valid_moves.each do |move|
-                original_piece = board.board[move[0], move[1]].piece
-                board.board[move[0], move[1]].piece = you
-                board.board[i, j].piece = nil
-                if board.check? == -1
+                original_piece = @board.board[move[0], move[1]].piece
+                @board.board[move[0], move[1]].piece = you
+                @board.board[i, j].piece = nil
+                if @board.check? == -1
                     # puts "Les regalaste un jaque"
                     white_counter << -1
                 else
                     white_counter << 0
                 end
-                board.board[move[0], move[1]].piece = original_piece
-                board.board[i, j].piece = you
+                @board.board[move[0], move[1]].piece = original_piece
+                @board.board[i, j].piece = you
             end
         end
         # p white_counter
         black_counter = []
         black_pieces.each do |spot|
-            index = board.board.find_index(spot)
+            index = @board.board.find_index(spot)
             i = index[0]
             j = index[1]
-            you = board.board[i, j].piece
-            valid_moves = you.valid_moves([i,j], board)
+            you = @board.board[i, j].piece
+            valid_moves = you.valid_moves([i,j], @board)
             valid_moves.each do |move|
-                original_piece = board.board[move[0], move[1]].piece
-                board.board[move[0], move[1]].piece = you
-                board.board[i, j].piece = nil
-                if board.check? == 1
+                original_piece = @board.board[move[0], move[1]].piece
+                @board.board[move[0], move[1]].piece = you
+                @board.board[i, j].piece = nil
+                if @board.check? == 1
                     # puts "Les regalaste un jaque"
                     black_counter << -1
                 else
                     black_counter << 0
                 end
-                board.board[move[0], move[1]].piece = original_piece
-                board.board[i, j].piece = you
+                @board.board[move[0], move[1]].piece = original_piece
+                @board.board[i, j].piece = you
             end
         end
         # p black_counter
