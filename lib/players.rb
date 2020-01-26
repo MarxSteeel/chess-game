@@ -2,10 +2,30 @@ require_relative "board"
 require_relative "pieces"
 
 class Player
-    attr_reader :color
+    attr_reader :color, :dictionary
     def initialize
-        @color = nil
+        @color = set_color
+        @dictionary = {"a"=>0, "b"=>1, "c"=>2, "d"=>3, "e"=>4, "f"=>5, "g"=>6, "h"=>7}
     end
+
+    def set_color
+        return nil
+    end
+
+    def move(string, board)
+        spots = parser(string)
+        start = spots[0]
+        finish = spots[1]
+        if can_move?(start, board)
+            i = start[0]
+            j = start[1]
+            board.move([i,j], [finish[0], finish[1]])
+        else
+            return false
+        end
+    end
+
+    private
 
     def can_move?(spot, board)
         i = spot[0]
@@ -17,20 +37,32 @@ class Player
             return false
         end
     end
+
+    def parser(string)
+        start = []
+        finish = []
+        start << string[1].to_i - 1
+        start << @dictionary[string[0]]
+        finish << string[3].to_i - 1
+        finish << @dictionary[string[2]]
+        return [start, finish]
+    end
 end
 
 class WhitePlayer < Player
-    def initialize
-        @color = :white
+    def set_color
+        return :white
     end
 end
 
 class BlackPlayer < Player
-    def initialize
-        @color = :black
+    def set_color
+        return :black
     end
 end
 
-# player_one = WhitePlayer.new
-# board = Board.new
-# p player_one.can_move?([0,0], board)
+player_one = WhitePlayer.new
+board = Board.new
+player_one.move("b1c3", board)
+puts "\n"
+puts board.render

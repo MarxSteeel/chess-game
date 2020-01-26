@@ -1,0 +1,193 @@
+POLYGLOT *** START ***
+POLYGLOT INI file "/snap/gnuchess/10/share/gnuchess/gnuchess.ini"
+> ENGINE uci
+< ENGINE id name GNU Chess 6.2.5
+< ENGINE id author GNU Chess team
+< ENGINE option name Hash type spin default 16 min 4 max 1024
+< ENGINE option name Ponder type check default false
+< ENGINE option name OwnBook type check default true
+< ENGINE option name BookFile type string default book_small.bin
+< ENGINE option name NullMove Pruning type combo default Fail High var Always var Fail High var Never
+< ENGINE option name NullMove Reduction type spin default 3 min 1 max 3
+< ENGINE option name Verification Search type combo default Endgame var Always var Endgame var Never
+< ENGINE option name Verification Reduction type spin default 5 min 1 max 6
+< ENGINE option name History Pruning type check default true
+< ENGINE option name History Threshold type spin default 60 min 0 max 100
+< ENGINE option name Futility Pruning type check default false
+< ENGINE option name Futility Margin type spin default 100 min 0 max 500
+< ENGINE option name Delta Pruning type check default false
+< ENGINE option name Delta Margin type spin default 50 min 0 max 500
+< ENGINE option name Quiescence Check Plies type spin default 1 min 0 max 2
+< ENGINE option name Material type spin default 100 min 0 max 400
+< ENGINE option name Piece Activity type spin default 100 min 0 max 400
+< ENGINE option name King Safety type spin default 100 min 0 max 400
+< ENGINE option name Pawn Structure type spin default 100 min 0 max 400
+< ENGINE option name Passed Pawns type spin default 100 min 0 max 400
+< ENGINE uciok
+> ENGINE setoption name Hash value 256
+> ENGINE setoption name OwnBook value false
+> ENGINE setoption name BookFile value smallbook.bin
+> ENGINE isready
+< XBOARD Nf3
+POLYGLOT MOVE Nf3
+POLYGLOT WAIT -> THINK
+POLYGLOT *BOOK MOVE*
+> XBOARD move d7d5
+POLYGLOT MOVE d5
+POLYGLOT THINK -> WAIT
+< ENGINE readyok
+< XBOARD Na3
+POLYGLOT MOVE Na3
+POLYGLOT WAIT -> THINK
+POLYGLOT START SEARCH
+> ENGINE setoption name Ponder value true
+POLYGLOT FEN rnbqkbnr/ppp1pppp/8/3p4/8/N4N2/PPPPPPPP/R1BQKB1R b KQkq - 1 2
+> ENGINE position startpos moves g1f3 d7d5 b1a3
+> ENGINE go wtime 300000 btime 300000
+< ENGINE info depth 1
+< ENGINE info depth 1 seldepth 1 score cp -31 time 0 nodes 2 pv d5d4
+< ENGINE info depth 1 seldepth 1 score cp -24 time 0 nodes 3 pv a7a5
+< ENGINE info depth 1 seldepth 2 score cp -18 time 0 nodes 7 pv b7b6
+< ENGINE info depth 1 seldepth 4 score cp -16 time 0 nodes 14 pv e7e6
+< ENGINE info depth 1 seldepth 4 score cp -6 time 0 nodes 22 pv b8a6
+< ENGINE info depth 1 seldepth 4 score cp 22 time 0 nodes 23 pv b8c6
+< ENGINE info depth 1 seldepth 7 score cp 26 time 1 nodes 60 pv g8f6
+< ENGINE info depth 1 seldepth 7 time 1 nodes 61 nps 0
+< ENGINE info depth 2
+< ENGINE info depth 2 seldepth 7 score cp -22 time 1 nodes 89 pv g8f6 d2d4
+< ENGINE info depth 2 seldepth 8 time 1 nodes 176 nps 0
+< ENGINE info depth 3
+< ENGINE info depth 3 seldepth 9 score cp 28 time 2 nodes 294 pv g8f6 d2d4 b8c6
+< ENGINE info depth 3 seldepth 9 time 2 nodes 354 nps 0
+< ENGINE info depth 4
+< ENGINE info depth 4 seldepth 9 score cp -14 time 3 nodes 619 pv g8f6 d2d4 b8c6 c1f4
+< ENGINE info depth 4 seldepth 14 time 6 nodes 1879 nps 0
+< ENGINE info depth 5
+< ENGINE info depth 5 seldepth 14 score cp 28 time 7 nodes 3590 pv g8f6 d2d4 b8c6 c1f4 c8f5
+< ENGINE info depth 5 seldepth 14 time 7 nodes 3650 nps 0
+< ENGINE info depth 6
+< ENGINE info depth 6 seldepth 15 score cp -6 time 12 nodes 9597 pv g8f6 d2d3 b8c6 c1f4 c8f5 a3b5
+< ENGINE info depth 6 seldepth 15 score cp -5 time 16 nodes 13926 pv b8c6 d2d4 g8f6 c1f4 c8f5 a3b5
+< ENGINE info depth 6 seldepth 16 time 27 nodes 27281 nps 0
+< ENGINE info depth 7
+< ENGINE info depth 7 seldepth 19 score cp 21 time 36 nodes 40066 pv b8c6 d2d4 g8f6 c1f4 f6h5 f4g5 c8f5
+< ENGINE info depth 7 seldepth 19 time 40 nodes 46783 nps 0
+< ENGINE info depth 8
+< ENGINE info depth 8 seldepth 19 score cp -12 time 60 nodes 77988 pv b8c6 d2d4 g8f6 c1f4 f6h5 f4g5 c8f5 a3b5
+< ENGINE info depth 8 seldepth 22 score cp 8 time 120 nodes 176441 pv g8f6 d2d4 c7c5 c1f4 b8c6 a3b5 d8a5 b5c3 c8f5
+< ENGINE info depth 8 seldepth 22 time 144 nodes 219612 nps 0
+< ENGINE info depth 9
+< ENGINE info depth 9 seldepth 22 score cp 8 time 226 nodes 374624 pv g8f6 d2d4 c7c5 c2c3 b8c6 c1f4 d8b6 d1b3 f6e4
+< ENGINE info depth 9 seldepth 22 time 283 nodes 484173 nps 0
+< ENGINE info depth 10
+< ENGINE info depth 10 seldepth 24 score cp 10 time 452 nodes 805644 pv g8f6 d2d4 b8c6 c1f4 f6h5 f4d2 c8f5 a3b5 a7a6 f3h4
+< ENGINE info depth 10 seldepth 24 time 604 nodes 1096371 nps 0
+< ENGINE info depth 11
+< ENGINE info time 1004 nodes 1830000 nps 1823328 cpuload 1000
+< ENGINE info hashfull 17
+< ENGINE info time 2004 nodes 3690000 nps 1840944 cpuload 1000
+< ENGINE info hashfull 36
+< ENGINE info depth 11 seldepth 29 score cp 17 time 2484 nodes 4576690 pv g8f6 c2c4 e7e6 c4d5 e6d5 a3b5 b8c6 d1c2 f6e4 d2d3 f8b4 b5c3 e4c3 b2c3
+< ENGINE info currmove b8c6 currmovenumber 2
+< ENGINE info currmove c8f5 currmovenumber 3
+< ENGINE info currmove c8g4 currmovenumber 4
+< ENGINE info currmove c8d7 currmovenumber 5
+< ENGINE info currmove g8h6 currmovenumber 6
+< ENGINE info currmove b8a6 currmovenumber 7
+< ENGINE info currmove d8d6 currmovenumber 8
+< ENGINE info currmove b8d7 currmovenumber 9
+< ENGINE info currmove e7e6 currmovenumber 10
+< ENGINE info currmove b7b6 currmovenumber 11
+< ENGINE info currmove g7g6 currmovenumber 12
+< ENGINE info currmove a7a5 currmovenumber 13
+< ENGINE info currmove h7h5 currmovenumber 14
+< ENGINE info currmove c7c5 currmovenumber 15
+< ENGINE info currmove c7c6 currmovenumber 16
+< ENGINE info currmove a7a6 currmovenumber 17
+< ENGINE info currmove h7h6 currmovenumber 18
+< ENGINE info currmove d5d4 currmovenumber 19
+< ENGINE info currmove f7f6 currmovenumber 20
+< ENGINE info currmove d8d7 currmovenumber 21
+< ENGINE info currmove f7f5 currmovenumber 22
+< ENGINE info currmove c8e6 currmovenumber 23
+< ENGINE info currmove e8d7 currmovenumber 24
+< ENGINE info currmove g7g5 currmovenumber 25
+< ENGINE info currmove b7b5 currmovenumber 26
+< ENGINE info currmove e7e5 currmovenumber 27
+< ENGINE info currmove c8h3 currmovenumber 28
+< ENGINE info depth 11 seldepth 29 time 2790 nodes 5148485 nps 1845057
+< ENGINE info depth 12
+< ENGINE info currmove g8f6 currmovenumber 1
+< ENGINE info time 3006 nodes 5540000 nps 1843222 cpuload 1000
+< ENGINE info hashfull 53
+< ENGINE info time 4009 nodes 7390000 nps 1843536 cpuload 1000
+< ENGINE info hashfull 68
+< ENGINE info time 5009 nodes 9220000 nps 1840539 cpuload 1000
+< ENGINE info hashfull 83
+< ENGINE info depth 12 seldepth 36 score cp 12 time 5167 nodes 9512536 pv g8f6 d2d4 b8c6 c1f4 f6h5 f4d2 c8g4 e2e3 e7e5 a3b5 a7a6 h2h3
+< ENGINE info currmove b8c6 currmovenumber 2
+< ENGINE info currmove c8f5 currmovenumber 3
+< ENGINE info currmove c8g4 currmovenumber 4
+< ENGINE info currmove c8d7 currmovenumber 5
+< ENGINE info currmove g8h6 currmovenumber 6
+< ENGINE info currmove b8a6 currmovenumber 7
+< ENGINE info currmove d8d6 currmovenumber 8
+< ENGINE info currmove b8d7 currmovenumber 9
+< ENGINE info currmove e7e6 currmovenumber 10
+< ENGINE info currmove b7b6 currmovenumber 11
+< ENGINE info currmove g7g6 currmovenumber 12
+< ENGINE info currmove a7a5 currmovenumber 13
+< ENGINE info currmove h7h5 currmovenumber 14
+< ENGINE info currmove c7c5 currmovenumber 15
+< ENGINE info time 6012 nodes 11120000 nps 1849611 cpuload 1000
+< ENGINE info hashfull 101
+< ENGINE info currmove c7c6 currmovenumber 16
+< ENGINE info currmove a7a6 currmovenumber 17
+< ENGINE info currmove h7h6 currmovenumber 18
+< ENGINE info currmove d5d4 currmovenumber 19
+< ENGINE info currmove f7f6 currmovenumber 20
+< ENGINE info currmove d8d7 currmovenumber 21
+< ENGINE info currmove f7f5 currmovenumber 22
+< ENGINE info currmove c8e6 currmovenumber 23
+< ENGINE info currmove e8d7 currmovenumber 24
+< ENGINE info currmove g7g5 currmovenumber 25
+< ENGINE info currmove b7b5 currmovenumber 26
+< ENGINE info currmove e7e5 currmovenumber 27
+< ENGINE info currmove c8h3 currmovenumber 28
+< ENGINE info depth 12 seldepth 36 time 6454 nodes 11927942 nps 1848286
+< ENGINE info depth 13
+< ENGINE info currmove g8f6 currmovenumber 1
+< ENGINE info time 7014 nodes 12930000 nps 1843481 cpuload 1000
+< ENGINE info hashfull 117
+< ENGINE info time 8019 nodes 14790000 nps 1844374 cpuload 1000
+< ENGINE info hashfull 134
+< ENGINE info time 9021 nodes 16680000 nps 1849033 cpuload 1000
+< ENGINE info hashfull 151
+< ENGINE info time 10027 nodes 18520000 nps 1847082 cpuload 1000
+< ENGINE info hashfull 167
+< ENGINE info depth 13 seldepth 36 score cp 8 time 10675 nodes 19739509 pv g8f6 d2d4 e7e6 e2e3 f8a3 b2a3 b8c6 f1d3 e8g8 e1g1 f6e4 c1d2 c8d7 d3e4 d5e4
+< ENGINE info currmove b8c6 currmovenumber 2
+< ENGINE info time 11030 nodes 20400000 nps 1849537 cpuload 1000
+< ENGINE info hashfull 183
+< ENGINE info currmove b8c6 currmovenumber 2
+< ENGINE info time 12032 nodes 22240000 nps 1848404 cpuload 1000
+< ENGINE info hashfull 201
+< ENGINE info currmove c8f5 currmovenumber 3
+< ENGINE info currmove c8g4 currmovenumber 4
+< ENGINE info currmove c8d7 currmovenumber 5
+< ENGINE info time 13037 nodes 24080000 nps 1847063 cpuload 1000
+< ENGINE info hashfull 216
+< ENGINE info currmove g8h6 currmovenumber 6
+< ENGINE info currmove b8a6 currmovenumber 7
+< ENGINE info currmove d8d6 currmovenumber 8
+< ENGINE info time 14043 nodes 25900000 nps 1844321 cpuload 1000
+< ENGINE info hashfull 232
+< ENGINE info currmove b8d7 currmovenumber 9
+< ENGINE info currmove e7e6 currmovenumber 10
+< ENGINE info currmove b7b6 currmovenumber 11
+< ENGINE info currmove g7g6 currmovenumber 12
+< ENGINE info currmove a7a5 currmovenumber 13
+< ENGINE info currmove h7h5 currmovenumber 14
+< ENGINE info currmove c7c5 currmovenumber 15
+< ENGINE info time 15044 nodes 27790000 nps 1847233 cpuload 1000
+< ENGINE info hashfull 252
