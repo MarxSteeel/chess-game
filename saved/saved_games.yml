@@ -1,0 +1,259 @@
+--- !ruby/object:Matrix
+rows:
+- - !ruby/object:Spot
+    piece: !ruby/object:Rook
+      color: :white
+      type: rook
+      counter: 0
+      symbol: "♜"
+  - !ruby/object:Spot
+    piece: !ruby/object:Knight
+      color: :white
+      type: knight
+      counter: 0
+      symbol: "♞"
+  - !ruby/object:Spot
+    piece: !ruby/object:Bishop
+      color: :white
+      type: bishop
+      counter: 0
+      symbol: "♝"
+  - !ruby/object:Spot
+    piece: !ruby/object:Queen
+      color: :white
+      type: queen
+      counter: 0
+      symbol: "♛"
+  - !ruby/object:Spot
+    piece: !ruby/object:King
+      color: :white
+      type: king
+      counter: 0
+      symbol: "♚"
+  - !ruby/object:Spot
+    piece: !ruby/object:Bishop
+      color: :white
+      type: bishop
+      counter: 0
+      symbol: "♝"
+  - !ruby/object:Spot
+    piece: !ruby/object:Knight
+      color: :white
+      type: knight
+      counter: 0
+      symbol: "♞"
+  - !ruby/object:Spot
+    piece: !ruby/object:Rook
+      color: :white
+      type: rook
+      counter: 0
+      symbol: "♜"
+- - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :white
+      type: pawn
+      counter: 0
+      symbol: "♟"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :white
+      type: pawn
+      counter: 0
+      symbol: "♟"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :white
+      type: pawn
+      counter: 0
+      symbol: "♟"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :white
+      type: pawn
+      counter: 0
+      symbol: "♟"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :white
+      type: pawn
+      counter: 0
+      symbol: "♟"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :white
+      type: pawn
+      counter: 0
+      symbol: "♟"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :white
+      type: pawn
+      counter: 0
+      symbol: "♟"
+- - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+- - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :white
+      type: pawn
+      counter: 1
+      symbol: "♟"
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+- - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+- - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: 
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :black
+      type: pawn
+      counter: 1
+      symbol: "♙"
+- - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :black
+      type: pawn
+      counter: 0
+      symbol: "♙"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :black
+      type: pawn
+      counter: 0
+      symbol: "♙"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :black
+      type: pawn
+      counter: 0
+      symbol: "♙"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :black
+      type: pawn
+      counter: 0
+      symbol: "♙"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :black
+      type: pawn
+      counter: 0
+      symbol: "♙"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :black
+      type: pawn
+      counter: 0
+      symbol: "♙"
+  - !ruby/object:Spot
+    piece: !ruby/object:Pawn
+      color: :black
+      type: pawn
+      counter: 0
+      symbol: "♙"
+  - !ruby/object:Spot
+    piece: 
+- - !ruby/object:Spot
+    piece: !ruby/object:Rook
+      color: :black
+      type: rook
+      counter: 0
+      symbol: "♖"
+  - !ruby/object:Spot
+    piece: !ruby/object:Knight
+      color: :black
+      type: knight
+      counter: 0
+      symbol: "♘"
+  - !ruby/object:Spot
+    piece: !ruby/object:Bishop
+      color: :black
+      type: bishop
+      counter: 0
+      symbol: "♗"
+  - !ruby/object:Spot
+    piece: !ruby/object:Queen
+      color: :black
+      type: queen
+      counter: 0
+      symbol: "♕"
+  - !ruby/object:Spot
+    piece: !ruby/object:King
+      color: :black
+      type: king
+      counter: 0
+      symbol: "♔"
+  - !ruby/object:Spot
+    piece: !ruby/object:Bishop
+      color: :black
+      type: bishop
+      counter: 0
+      symbol: "♗"
+  - !ruby/object:Spot
+    piece: !ruby/object:Knight
+      color: :black
+      type: knight
+      counter: 0
+      symbol: "♘"
+  - !ruby/object:Spot
+    piece: !ruby/object:Rook
+      color: :black
+      type: rook
+      counter: 0
+      symbol: "♖"
+column_count: 8

@@ -8,6 +8,14 @@ game = Game.new(board)
 player_one = WhitePlayer.new
 player_two = BlackPlayer.new
 
+print "Welcome! Do you want to load your last game?(Y/N): "
+option = gets.chomp
+
+if option.upcase == "Y"
+    board.load_game
+end
+
+puts "\n"
 
 while true
     move = false
@@ -15,9 +23,14 @@ while true
         puts board.render
         print "White moves: "
         spots = gets.chomp
-        if spots == "shortcastle"
+        if spots.downcase == "save"
+            board.save_game
+        end
+        if spots.downcase == "shortcastle"
+            puts "\n"
             move = board.castle("short", player_one.color)
-        elsif spots == "longcastle"
+        elsif spots.downcase == "longcastle"
+            puts "\n"
             move = board.castle("long", player_one.color)
         else
             puts "\n"
@@ -31,9 +44,14 @@ while true
         puts board.render
         print "Black moves: "
         spots = gets.chomp
-        if spots == "shortcastle"
+        if spots.downcase == "save"
+            board.save_game
+        end
+        if spots.downcase == "shortcastle"
+            puts "\n"
             move = board.castle("short", player_two.color)
-        elsif spots == "longcastle"
+        elsif spots.downcase == "longcastle"
+            puts "\n"
             move = board.castle("long", player_two.color)
         else
             puts "\n"

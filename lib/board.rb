@@ -1,6 +1,7 @@
 require "matrix"
-require_relative "pieces"
 require "colorize"
+require "yaml"
+require_relative "pieces"
 
 class Spot
     attr_accessor :piece
@@ -19,6 +20,15 @@ class Board
         @board = create_board
     end
 
+    def save_game
+        saved = File.open("./saved/saved_games.yml", "w") {|file| file.write(@board.to_yaml)}
+    end
+
+    def load_game
+        saved = YAML.load(File.read("./saved/saved_games.yml"))
+        @board = saved
+    end
+
     def move(start, finish)
         i = start[0]
         j = start[1]
@@ -28,10 +38,21 @@ class Board
             original_piece = self.board[finish[0], finish[1]].piece
             self.board[finish[0], finish[1]].piece = you
             self.board[i, j].piece = nil
+            if self.board[finish[0], finish[1]].piece.type == "pawn" 
+                if self.board[finish[0], finish[1]].piece.can_promote?(finish, self)
+                    puts self.render
+                    print "Choose a piece to promote your pawn: "
+                    new_piece = gets.chomp
+                    new_piece.downcase!
+                    spot = self.board[finish[0], finish[1]]
+                    self.promote(spot, new_piece)
+                end
+            end
             if (you.color == :white && self.check? == -1) || (you.color == :black && self.check? == 1)
                 self.board[finish[0], finish[1]].piece = original_piece
                 self.board[i, j].piece = you
-                # puts "Les regalaste un jaque"
+                puts "You are in check"
+                puts "\n"
                 return false
             end
         elsif !valid_moves.include?(finish)
@@ -220,7 +241,8 @@ class Board
     
 end
 
-# board = Board.new
+board = Board.new
+
 # board.board.column(0).each_with_index do |elm, i|
 #     p i
 # end
@@ -252,4 +274,11 @@ end
 # p board.check?
 # p board.checkmate?
 # puts board.render
+# board.move([1,0], [3,0])
+# board.move([3,0], [4,0])
+# board.move([4,0], [5,0])
+# board.move([5,0], [6,1])
+# board.move([6,1], [7,0])
+# puts board.render
+# p board.board[6,1].piece.valid_moves([6,1], board)
 

@@ -38,36 +38,41 @@ class Pawn < Piece
     end 
 
     def valid_moves(start, board)
-
         moves = []
         i = start[0]
-        j = start[1]
+        j = start[1] 
         if @color == :white
-            moves << [i + 1, j]
-            if i == 1
-                moves << [i + 2, j]
-            end
-            if j < 7
-                if board.board[i + 1, j + 1].occupied? && board.board[i+1,j+1].piece.color == :black
-                    moves << [i + 1, j + 1]
+            if i < 7
+                moves << [i + 1, j] if !board.board[i+1, j].occupied?
+                if i == 1
+                    moves << [i + 2, j]
                 end
-            elsif j > 0
-                if board.board[i + 1, j - 1].occupied? && board.board[i+1,j-1].piece.color == :black
-                    moves << [i + 1, j - 1]
+                if j < 7 
+                    if board.board[i + 1, j + 1].occupied? && board.board[i+1,j+1].piece.color == :black
+                        moves << [i + 1, j + 1]
+                    end
+                end
+                if j > 0 
+                    if board.board[i + 1, j - 1].occupied? && board.board[i+1,j-1].piece.color == :black
+                        moves << [i + 1, j - 1]
+                    end
                 end
             end
         elsif @color == :black
-            moves << [i - 1, j]
-            if i == 6
-                moves << [i - 2, j]
-            end
-            if j < 7
-                if board.board[i - 1, j + 1].occupied? && board.board[i-1,j+1].piece.color == :white
-                    moves << [i - 1, j + 1]
+            if i > 0
+                moves << [i - 1, j] if !board.board[i-1, j].occupied?
+                if i == 6
+                    moves << [i - 2, j]
                 end
-            elsif j > 0
-                if board.board[i - 1, j - 1].occupied? && board.board[i-1,j-1].piece.color == :white
-                    moves << [i - 1, j - 1]
+                if j < 7 
+                    if board.board[i - 1, j + 1].occupied? && board.board[i-1,j+1].piece.color == :white
+                        moves << [i - 1, j + 1]
+                    end
+                end
+                if j > 0 
+                    if board.board[i - 1, j - 1].occupied? && board.board[i-1,j-1].piece.color == :white
+                        moves << [i - 1, j - 1]
+                    end
                 end
             end
         end

@@ -43,9 +43,9 @@ class Player
         start = []
         finish = []
         start << string[1].to_i - 1
-        start << @dictionary[string[0]]
+        start << @dictionary[string[0].downcase]
         finish << string[3].to_i - 1
-        finish << @dictionary[string[2]]
+        finish << @dictionary[string[2].downcase]
         return [start, finish]
     end
 end
