@@ -18,6 +18,7 @@ class Piece
 end
 
 class Pawn < Piece
+    attr_accessor :en_passant
 
     def set_type
         @type = "pawn"
@@ -37,6 +38,14 @@ class Pawn < Piece
         return false
     end 
 
+    def double?(board)
+        last = board.moves[-1]
+        if last[0] == self && (last[1][0] - last[2][0]).abs == 2
+            return true
+        end
+        return false
+    end
+
     def valid_moves(start, board)
         moves = []
         i = start[0]
@@ -51,10 +60,24 @@ class Pawn < Piece
                     if board.board[i + 1, j + 1].occupied? && board.board[i+1,j+1].piece.color == :black
                         moves << [i + 1, j + 1]
                     end
+                    if board.board[i,j+1].occupied? && board.board[i,j+1].piece.color == :black && 
+                        board.board[i,j+1].piece.type == "pawn"
+                        if board.board[i,j+1].piece.double?(board)
+                            moves << [i + 1, j + 1]
+                            self.en_passant = true
+                        end
+                    end
                 end
                 if j > 0 
                     if board.board[i + 1, j - 1].occupied? && board.board[i+1,j-1].piece.color == :black
                         moves << [i + 1, j - 1]
+                    end
+                    if board.board[i,j-1].occupied? && board.board[i,j-1].piece.color == :black && 
+                        board.board[i,j-1].piece.type == "pawn"
+                        if board.board[i,j-1].piece.double?(board)
+                            moves << [i + 1, j - 1]
+                            self.en_passant = true
+                        end
                     end
                 end
             end
@@ -68,10 +91,24 @@ class Pawn < Piece
                     if board.board[i - 1, j + 1].occupied? && board.board[i-1,j+1].piece.color == :white
                         moves << [i - 1, j + 1]
                     end
+                    if board.board[i,j+1].occupied? && board.board[i,j+1].piece.color == :white && 
+                        board.board[i,j+1].piece.type == "pawn"
+                        if board.board[i,j+1].piece.double?(board)
+                            moves << [i - 1, j + 1]
+                            self.en_passant = true
+                        end
+                    end
                 end
                 if j > 0 
                     if board.board[i - 1, j - 1].occupied? && board.board[i-1,j-1].piece.color == :white
                         moves << [i - 1, j - 1]
+                    end
+                    if board.board[i,j-1].occupied? && board.board[i,j-1].piece.color == :white && 
+                        board.board[i,j-1].piece.type == "pawn"
+                        if board.board[i,j-1].piece.double?(board)
+                            moves << [i - 1, j - 1]
+                            self.en_passant = true
+                        end
                     end
                 end
             end

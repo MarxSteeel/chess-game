@@ -12,7 +12,7 @@ print "Welcome! Do you want to load your last game?(Y/N): "
 option = gets.chomp
 
 if option.upcase == "Y"
-    board.load_game
+    game.load_game(board)
 end
 
 puts "\n"
@@ -24,7 +24,7 @@ while true
         print "White moves: "
         spots = gets.chomp
         if spots.downcase == "save"
-            board.save_game
+            game.save_game(board)
         end
         if spots.downcase == "shortcastle"
             puts "\n"
@@ -61,3 +61,8 @@ while true
     puts "\n"
     break if game.end?
 end
+
+#log
+
+# Tengo que escribir tests oficiales
+# Opción de deshacer?

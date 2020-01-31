@@ -15,18 +15,10 @@ class Spot
 end
 
 class Board
-    attr_accessor :board
+    attr_accessor :board, :moves
     def initialize
         @board = create_board
-    end
-
-    def save_game
-        saved = File.open("./saved/saved_games.yml", "w") {|file| file.write(@board.to_yaml)}
-    end
-
-    def load_game
-        saved = YAML.load(File.read("./saved/saved_games.yml"))
-        @board = saved
+        @moves = []
     end
 
     def move(start, finish)
@@ -58,7 +50,17 @@ class Board
         elsif !valid_moves.include?(finish)
             return false
         end
+        if self.board[finish[0], finish[1]].piece.type == "pawn"
+            if self.board[finish[0], finish[1]].piece.en_passant && self.board[finish[0], finish[1]].piece.color == :white
+                self.board[finish[0] - 1, finish[1]].piece = nil
+                self.board[finish[0], finish[1]].piece.en_passant = false
+            elsif self.board[finish[0], finish[1]].piece.en_passant && self.board[finish[0], finish[1]].piece.color == :black
+                self.board[finish[0] + 1, finish[1]].piece = nil
+                self.board[finish[0], finish[1]].piece.en_passant = false
+            end
+        end
         self.board[finish[0], finish[1]].piece.counter += 1
+        self.moves << [self.board[finish[0], finish[1]].piece, [i,j], [finish[0], finish[1]]]
         return true
     end
 
@@ -156,19 +158,19 @@ class Board
             self.board.row(row).each_with_index do |spot, i|
                 if (i + row).even? || (i + row) == 0
                     if spot.occupied?
-                        board_string += " ".colorize(:background => :light_black)
-                        board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :light_black)
-                        board_string += " ".colorize(:background => :light_black)
-                    else
-                        board_string += (" ".colorize(:background => :light_black)) * 3
-                    end
-                else
-                    if spot.occupied?
                         board_string += " ".colorize(:background => :black)
                         board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :black)
                         board_string += " ".colorize(:background => :black)
                     else
                         board_string += (" ".colorize(:background => :black)) * 3
+                    end
+                else
+                    if spot.occupied?
+                        board_string += " ".colorize(:background => :light_black)
+                        board_string += self.board.row(row)[i].piece.symbol.colorize(:background => :light_black)
+                        board_string += " ".colorize(:background => :light_black)
+                    else
+                        board_string += (" ".colorize(:background => :light_black)) * 3
                     end
                 end
             end
@@ -248,6 +250,15 @@ board = Board.new
 # end
 # p board.board[0,0].piece.valid_moves([0,0], board)
 
+
+# board.move([1,0], [3,0])
+# board.move([1,1], [2,1])
+# board.move([2,0], [3,0])
+# board.move([3,0], [4,0])
+# puts board.render
+# p board.moves
+# p board.board[3,0].piece.double?(board)
+
 # Jaque mate pastor
 
 # board.move([1,0], [2,0])
@@ -267,9 +278,13 @@ board = Board.new
 # pieces = pieces.select {|spot| spot.piece.type == "king"}
 # board.promote(board.board[1,0], "queen")
 # p board.castle("short", :black)
+
+
+# board.move([1,0], [3,0])
 # pieces = board.board.map {|spot| spot.piece}
+# p pieces
 # p board.board[1,5].piece.counter
-# puts board.board[0,0].piece.symbol.colorize(:background => :light_black)
+# puts board.board[0,0].piece.symbol.colorize(:background => :black)
 # p pieces
 # p board.check?
 # p board.checkmate?

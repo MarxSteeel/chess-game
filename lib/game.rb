@@ -7,6 +7,15 @@ class Game
         @board = board
     end
 
+    def save_game(board)
+        saved = File.open("./saved/saved_games.yml", "w") {|file| file.write(board.board.to_yaml)}
+    end
+
+    def load_game(board)
+        saved = YAML.load(File.read("./saved/saved_games.yml"))
+        board.board = saved
+    end
+
     def end?
         if self.checkmate? == 1
             puts @board.render
